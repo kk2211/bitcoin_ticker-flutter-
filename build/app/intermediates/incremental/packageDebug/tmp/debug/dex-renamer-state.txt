@@ -1,4 +1,4 @@
-#Sun Dec 29 16:38:49 IST 2019
+#Wed Jan 01 23:36:36 IST 2020
 base.0=/home/kab/udemy/flutter/bitcoin_ticker/build/app/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

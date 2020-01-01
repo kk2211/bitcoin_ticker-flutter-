@@ -40,6 +40,22 @@ class _PriceScreenState extends State<PriceScreen> {
     }
   }
 
+  Column makeCards() {
+    List<CryptoCard> cryptoCards = [];
+
+    for (String crypto in prefix0.cryptoList) {
+      cryptoCards.add(CryptoCard(
+        cryptoCurrency: crypto,
+        selectedCurrency: selectedCurrency,
+        value: isWaiting ? '  ' : Coinvalue[crypto],
+      ));
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: cryptoCards,
+    );
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -52,40 +68,27 @@ class _PriceScreenState extends State<PriceScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Coin Ticker'),
+        title: Text(
+          'Coin Ticker',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
       ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                CryptoCard(
-                  cryptoCurrency: 'BTC',
-                  //7. Finally, we use a ternary operator to check if we are waiting and if so, we'll display a '?' otherwise we'll show the actual price data.
-                  value: isWaiting ? '...' : Coinvalue['BTC'],
-                  selectedCurrency: selectedCurrency,
-                ),
-                CryptoCard(
-                  cryptoCurrency: 'ETH',
-                  value: isWaiting ? '...' : Coinvalue['ETH'],
-                  selectedCurrency: selectedCurrency,
-                ),
-                CryptoCard(
-                  cryptoCurrency: 'LTC',
-                  value: isWaiting ? '...' : Coinvalue['LTC'],
-                  selectedCurrency: selectedCurrency,
-                ),
-              ],
+            SizedBox(
+              height: 1,
             ),
+            makeCards(),
             Container(
               height: 150.0,
               alignment: Alignment.center,
               padding: EdgeInsets.only(bottom: 30.0),
               color: Colors.lightBlue,
               child: DropdownButton<String>(
+                iconEnabledColor: Colors.black54,
                 isDense: false,
                 value: selectedCurrency,
                 items: getDropdownItems(),
@@ -128,7 +131,7 @@ class CryptoCard extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 20.0,
-              color: Colors.white,
+              color: Colors.black54,
             ),
           ),
         ),
